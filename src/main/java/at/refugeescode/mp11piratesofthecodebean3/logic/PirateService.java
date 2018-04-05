@@ -3,23 +3,18 @@ package at.refugeescode.mp11piratesofthecodebean3.logic;
 import at.refugeescode.mp11piratesofthecodebean3.persistence.PieceOfEightRepository;
 import at.refugeescode.mp11piratesofthecodebean3.persistence.Pirate;
 import at.refugeescode.mp11piratesofthecodebean3.persistence.PirateRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-//@Service
+@Service
+@RequiredArgsConstructor
 public class PirateService {
 
-    private PirateRepository pirateRepository;
-
-    private PieceOfEightRepository pieceOfEightRepository;
-
-    private CsvParser csvParser;
-
-    public PirateService(PirateRepository pirateRepository, PieceOfEightRepository pieceOfEightRepository, CsvParser csvParser) {
-        this.pirateRepository = pirateRepository;
-        this.pieceOfEightRepository = pieceOfEightRepository;
-        this.csvParser = csvParser;
-    }
+    private final PirateRepository pirateRepository;
+    private final PieceOfEightRepository pieceOfEightRepository;
+    private final CsvParser csvParser;
 
     public void populatePirates() {
 
@@ -39,4 +34,5 @@ public class PirateService {
         // delete all pieces of eight
 
     }
+
 }
