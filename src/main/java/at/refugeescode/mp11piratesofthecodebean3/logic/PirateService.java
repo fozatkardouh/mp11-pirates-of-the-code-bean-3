@@ -1,5 +1,6 @@
 package at.refugeescode.mp11piratesofthecodebean3.logic;
 
+import at.refugeescode.mp11piratesofthecodebean3.persistence.PieceOfEight;
 import at.refugeescode.mp11piratesofthecodebean3.persistence.PieceOfEightRepository;
 import at.refugeescode.mp11piratesofthecodebean3.persistence.Pirate;
 import at.refugeescode.mp11piratesofthecodebean3.persistence.PirateRepository;
@@ -17,22 +18,27 @@ public class PirateService {
     private final CsvParser csvParser;
 
     public void populatePirates() {
+        deleteAll();
 
-        // delete all the pirates and pieces of eight from the database
-        // use the csvParser to get a list of all the pirates, the path should be "classpath:pirates.csv"
-        // for each pirate, save first manually the piece of eight,
-        // connect it to the corresponding pirate and then save the pirate
+        PirateModule pirateModule = new PirateModule("classpath:pirates.csv");
+        List<Pirate> pirates = csvParser.asList(pirateModule);
+
+        pirates.forEach(this::process);
+    }
+
+    void deleteAll() {
+        pirateRepository.deleteAll();
+        pieceOfEightRepository.deleteAll();
+    }
+
+    private void process(Pirate pirate) {
+        PieceOfEight pieceOfEight = pieceOfEightRepository.save(pirate.getPieceOfEight());
+        pirate.setPieceOfEight(pieceOfEight);
+        pirateRepository.save(pirate);
     }
 
     public List<Pirate> findAll() {
-        return null; // return all the pirates from the database
-    }
-
-    public void deleteAll() {
-
-        // delete all pirates
-        // delete all pieces of eight
-
+        return pirateRepository.findAll();
     }
 
 }

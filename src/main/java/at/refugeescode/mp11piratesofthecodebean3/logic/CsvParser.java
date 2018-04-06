@@ -20,7 +20,7 @@ public class CsvParser {
         this.resourceLoader = resourceLoader;
     }
 
-    public <T> List<T> asList(CsvParserModule<T> module) {
+    <T> List<T> asList(CsvParserModule<T> module) {
         Resource resource = resourceLoader.getResource(module.getPath());
         try {
             return Files.lines(resource.getFile().toPath())

@@ -3,9 +3,9 @@ package at.refugeescode.mp11piratesofthecodebean3.logic;
 import at.refugeescode.mp11piratesofthecodebean3.persistence.PieceOfEight;
 import at.refugeescode.mp11piratesofthecodebean3.persistence.Pirate;
 
-public class PirateModule extends CsvParserModule<Pirate> {
+class PirateModule extends CsvParserModule<Pirate> {
 
-    public PirateModule(String path) {
+    PirateModule(String path) {
         super(path);
     }
 
